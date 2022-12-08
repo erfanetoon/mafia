@@ -1,0 +1,23 @@
+{
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    },
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "javascript.suggest.autoImports": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "html-css-class-completion.enableEmmetSupport": true
+}
