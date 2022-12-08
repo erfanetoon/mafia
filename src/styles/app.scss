@@ -1,0 +1,31 @@
+@tailwind components;
+@tailwind utilities;
+
+@import "variables";
+@import "reset";
+@import "mixins/mediaQuery";
+
+@layer utilities {
+    .direction-ltr {
+        direction: ltr;
+    }
+
+    .direction-rtl {
+        direction: rtl;
+    }
+
+    .font-numeric {
+        font-family: IRANSansFaNum, IRANSans, Arial, sans-serif !important;
+    }
+
+    .font-text {
+        font-family: IRANSans, Arial, sans-serif !important;
+    }
+}
+
+/* Ui Elements */
+@import "components/uiElements/index";
+
+/* Components */
+@import "components/scrollbar";
+@import "components/dateTime";
