@@ -1,13 +1,11 @@
+type TDesignGameSteps = "init" | "showRole" | "manage";
+
 type TRoleTypes = "citizen" | "mafia";
 
 type TGames = "rifleman" | "filimo" | "bartender";
 
-type TRiflemanRoles = "شهروند ساده" | "s";
-type TFilimoRoles = "شهروند ساده" | "b";
-type TBartenderRoles = "شهروند ساده" | "a";
-
 interface IRole {
-    name: string;
+    title: string;
     type: TRoleTypes;
 }
 

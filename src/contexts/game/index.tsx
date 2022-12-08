@@ -20,13 +20,26 @@ export const GameProvider: FC<Props> = ({ children }) => {
     const [data, setData] = useState(DefaultValue);
 
     useEffect(() => {
-        getUsers();
-
         setData((oldState) => ({
             ...oldState,
             users: getUsers(),
+            activeGame: getGame(),
         }));
     }, []);
+
+    const getGame = () => {
+        const game = getItem("game");
+
+        if (!game) {
+            return DefaultValue.activeGame;
+        }
+
+        return (
+            (JSON.parse(
+                game || JSON.stringify(DefaultValue.activeGame),
+            ) as GameContext["activeGame"]) || DefaultValue.activeGame
+        );
+    };
 
     const getUsers = () => {
         const users = getItem("users");
@@ -35,7 +48,21 @@ export const GameProvider: FC<Props> = ({ children }) => {
             return [];
         }
 
-        return (JSON.parse(getItem("users") || "[]") as Array<IUser>) || [];
+        return (JSON.parse(users || "[]") as Array<IUser>) || [];
+    };
+
+    const handleChangeActiveGame: GameContext["handleChangeActiveGame"] = (
+        newData,
+    ) => {
+        setItem({
+            key: "game",
+            value: JSON.stringify({ ...data.activeGame, ...newData }),
+        });
+
+        setData((oldState) => ({
+            ...oldState,
+            activeGame: { ...oldState.activeGame, ...newData },
+        }));
     };
 
     const handleAddUser: GameContext["handleAddUser"] = (newUser) => {
@@ -62,9 +89,14 @@ export const GameProvider: FC<Props> = ({ children }) => {
         }));
     };
 
-    console.log(data);
     return (
-        <Context.Provider value={{ ...data, handleRemoveUser, handleAddUser }}>
+        <Context.Provider
+            value={{
+                ...data,
+                handleChangeActiveGame,
+                handleRemoveUser,
+                handleAddUser,
+            }}>
             {children}
         </Context.Provider>
     );
