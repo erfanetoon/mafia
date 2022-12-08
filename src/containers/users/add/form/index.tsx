@@ -68,6 +68,7 @@ const Form: FC<Props> = ({ handleClose }) => {
                                 id="name"
                                 name="name"
                                 type="text"
+                                autoComplete="off"
                                 placeholder={"مانند: عرفان"}
                                 classNames={{
                                     input: "shadow-md bg-dark-400",

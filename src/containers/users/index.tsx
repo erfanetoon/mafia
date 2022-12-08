@@ -1,7 +1,7 @@
 import { useGameContext } from "@contexts/game";
 import { ActionIcon, Modal } from "@mantine/core";
 import classNames from "classnames";
-import { VscClose, VscTrash } from "react-icons/vsc";
+import { VscTrash } from "react-icons/vsc";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { useState } from "react";
 import Add from "./add";
