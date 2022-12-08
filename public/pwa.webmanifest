@@ -1,6 +1,6 @@
 {
-    "short_name": "Koja",
-    "name": "Koja Tracking System",
+    "short_name": "God of Mafia",
+    "name": "God of Mafia",
     "icons": [
         {
             "src": "favicon.ico",
@@ -40,6 +40,6 @@
     ],
     "start_url": ".",
     "display": "standalone",
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff"
+    "theme_color": "#2d2f54",
+    "background_color": "#2d2f54"
 }
