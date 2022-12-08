@@ -5,8 +5,9 @@ export const DefaultValue: GameContext = {
 
     // Active game
     activeGame: {
+        step: "init",
         roles: [],
-        type: null,
+        type: "rifleman",
         users: [],
         usersRole: [],
     },

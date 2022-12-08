@@ -100,24 +100,6 @@ const SpreadRoles: FC<Props> = ({ handleClose }) => {
 
             <div className="w-full h-full overflow-auto scroll-gray-700">
                 <div className="grid grid-cols-3 gap-4">
-                    {!selected &&
-                        users.map((item) => (
-                            <div
-                                className={classNames(
-                                    "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer",
-                                )}>
-                                <div className="h-10 w-10 mx-auto mb-2 relative">
-                                    <img
-                                        className="mx-auto h-10 w-10 border-2 border-solid border-white rounded-full shadow block"
-                                        src={item.avatar}
-                                        alt=""
-                                    />
-                                </div>
-
-                                <span className="font-medium">{item.name}</span>
-                            </div>
-                        ))}
-
                     {!!selected &&
                         selected.map((item) => (
                             <div

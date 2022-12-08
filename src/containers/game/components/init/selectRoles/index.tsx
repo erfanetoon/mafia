@@ -138,7 +138,8 @@ const SelectRoles: FC<Props> = ({ handleClose }) => {
                             <div
                                 className={classNames(
                                     "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer",
-                                )}>
+                                )}
+                                onClick={() => handleAddRole(item)}>
                                 <div className="h-12 w-12 mx-auto mb-2 relative">
                                     <img
                                         className="mx-auto h-12 w-12 border-2 border-solid border-white rounded-full shadow block"
@@ -172,7 +173,11 @@ const SelectRoles: FC<Props> = ({ handleClose }) => {
                                         color="green"
                                         radius={9999}
                                         size="sm"
-                                        onClick={() => handleAddRole(item)}>
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+
+                                            handleAddRole(item);
+                                        }}>
                                         <AiOutlinePlus className="text-xs" />
                                     </ActionIcon>
 
@@ -197,7 +202,11 @@ const SelectRoles: FC<Props> = ({ handleClose }) => {
                                                     item.type === section,
                                             )?.count
                                         }
-                                        onClick={() => handleRemoveRole(item)}>
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+
+                                            handleRemoveRole(item);
+                                        }}>
                                         <AiOutlineMinus className="text-xs" />
                                     </ActionIcon>
                                 </div>

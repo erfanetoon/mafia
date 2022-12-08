@@ -3,6 +3,7 @@ export interface GameContext {
 
     // Active game
     activeGame: {
+        step: TDesignGameSteps;
         type: TGames | null;
         users: Array<IUser>;
         roles: Array<IRole & { count: number }>;

@@ -1,4 +1,7 @@
+import { useGameContext } from "@contexts/game";
+import { DefaultValue } from "@contexts/game/settings";
 import { ActionIcon } from "@mantine/core";
+import { openConfirmModal } from "@mantine/modals";
 import { FC } from "react";
 import { VscChevronLeft } from "react-icons/vsc";
 import Components from "./components";
@@ -11,20 +14,43 @@ interface Props {
 const GameContainer: FC<Props> = ({ step, setStep }) => {
     const Component = Components[step];
 
+    const { handleChangeActiveGame } = useGameContext();
+
+    const confirmModal = () =>
+        openConfirmModal({
+            classNames: {
+                modal: "bg-dark-500 p-4",
+            },
+            centered: true,
+            title: "از خارج شدن از محیط بازی اطمینان دارید ؟ تمامی اطلاعات پاک میشود",
+            labels: { confirm: "خروج", cancel: "انصراف" },
+            cancelProps: {
+                radius: 9999,
+            },
+            confirmProps: {
+                radius: 9999,
+            },
+            onCancel: () => {},
+            onConfirm: () => {
+                handleChangeActiveGame(DefaultValue.activeGame);
+                setStep("init");
+            },
+        });
+
     const handleBackAction = () => {
         if (step === "showRole") {
             setStep("init");
         }
 
         if (step === "manage") {
-            // confirm modal
+            confirmModal();
             // clear activeGame
             // go to init page
         }
     };
 
     return (
-        <div>
+        <div className="flex flex-col items-center w-full h-full">
             {step !== "init" && (
                 <div className="pb-4 w-full">
                     <div className="flex items-center justify-between pb-4">

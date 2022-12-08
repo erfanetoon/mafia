@@ -47,7 +47,7 @@ const RootLayout: FC<Props> = ({
                     </div>
                 )}
 
-                <div className="h-full overflow-auto scroll-gray-700 w-full px-1">
+                <div className="h-full overflow-auto scroll-gray-700 w-full">
                     {children}
                 </div>
             </div>

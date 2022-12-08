@@ -3,10 +3,13 @@ import { useGameContext } from "@contexts/game";
 import { ActionIcon, Button, Modal, Select } from "@mantine/core";
 import { FC, useState } from "react";
 import { VscAdd } from "react-icons/vsc";
+import { BiTrash } from "react-icons/bi";
 import { IComponentProps } from "../types";
 import SelectRoles from "./selectRoles";
 import SelectUsers from "./selectUsers";
 import SpreadRoles from "./spreadRoles";
+import { DefaultValue } from "@contexts/game/settings";
+import { openConfirmModal } from "@mantine/modals";
 
 const Init: FC<IComponentProps> = ({ setStep }) => {
     const [isShowSelectUserModal, setIsShowSelectUserModal] = useState(false);
@@ -14,6 +17,28 @@ const Init: FC<IComponentProps> = ({ setStep }) => {
     const [isShowSpreadRolesModal, setIsShowSpreadRolesModal] = useState(false);
 
     const { activeGame, handleChangeActiveGame } = useGameContext();
+
+    const confirmModal = () =>
+        openConfirmModal({
+            classNames: {
+                modal: "bg-dark-500 p-4",
+            },
+            centered: true,
+            title: "از ریست کردن تمامی فیلد ها اطمینان دارید ؟",
+            labels: { confirm: "پاک کردن", cancel: "انصراف" },
+            cancelProps: {
+                radius: 9999,
+            },
+            confirmProps: {
+                radius: 9999,
+            },
+            onCancel: () => {},
+            onConfirm: () => handleClear(),
+        });
+
+    const handleClear = () => {
+        handleChangeActiveGame(DefaultValue.activeGame);
+    };
 
     const handleChangeType = (value: TGames) => {
         handleChangeActiveGame({
@@ -52,7 +77,7 @@ const Init: FC<IComponentProps> = ({ setStep }) => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <div className="mb-6">
                 <Select
                     label="سبک بازی"
@@ -189,7 +214,7 @@ const Init: FC<IComponentProps> = ({ setStep }) => {
                 </Modal>
             </div>
 
-            <div className="text-center">
+            <div className="text-center flex items-center">
                 <Button
                     fullWidth
                     className="transition-all duration-300"
@@ -202,6 +227,16 @@ const Init: FC<IComponentProps> = ({ setStep }) => {
                     onClick={() => setStep("showRole")}>
                     شروع بازی
                 </Button>
+
+                <ActionIcon
+                    variant="filled"
+                    color="gray.6"
+                    size="lg"
+                    radius={9999}
+                    className="mr-4"
+                    onClick={() => confirmModal()}>
+                    <BiTrash className="text-xl" />
+                </ActionIcon>
             </div>
         </div>
     );
