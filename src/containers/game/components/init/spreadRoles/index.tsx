@@ -101,8 +101,9 @@ const SpreadRoles: FC<Props> = ({ handleClose }) => {
             <div className="w-full h-full overflow-auto scroll-gray-700">
                 <div className="grid grid-cols-3 gap-4">
                     {!!selected &&
-                        selected.map((item) => (
+                        selected.map((item, i) => (
                             <div
+                                key={i}
                                 className={classNames(
                                     "text-center transition-all duration-300 rounded-3xl cursor-pointer",
                                 )}>

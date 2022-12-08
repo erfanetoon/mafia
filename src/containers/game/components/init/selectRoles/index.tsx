@@ -134,8 +134,9 @@ const SelectRoles: FC<Props> = ({ handleClose }) => {
                 <div className="grid grid-cols-3 gap-1">
                     {Roles[activeGame.type || "rifleman"]
                         .filter((item) => item.type === section)
-                        .map((item) => (
+                        .map((item, i) => (
                             <div
+                                key={i}
                                 className={classNames(
                                     "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer",
                                 )}

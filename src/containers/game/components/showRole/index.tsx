@@ -40,6 +40,7 @@ const ShowRole: FC<IComponentProps> = ({ setStep }) => {
                         (item, i) =>
                             !seen.includes(i) && (
                                 <div
+                                    key={i}
                                     className={classNames(
                                         "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer bg-white bg-opacity-5",
                                     )}

@@ -52,8 +52,9 @@ const SelectUsers: FC<Props> = ({ handleClose }) => {
     return (
         <>
             <div className="grid grid-cols-4 gap-4">
-                {users.map((item) => (
+                {users.map((item, i) => (
                     <div
+                        key={i}
                         className={classNames(
                             "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer",
                         )}

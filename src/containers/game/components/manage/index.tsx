@@ -26,8 +26,9 @@ const Manage = () => {
 
             <div className="h-full w-full overflow-auto scroll-gray-700">
                 <div className="grid grid-cols-3 gap-2">
-                    {activeGame.usersRole.map((item) => (
+                    {activeGame.usersRole.map((item, i) => (
                         <div
+                            key={i}
                             className={classNames(
                                 "text-center transition-all duration-300 rounded-3xl cursor-pointer",
                             )}>
