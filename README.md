@@ -1,6 +1,6 @@
 # شروع و استفاده از برنامه
 
-[Mafia website](https:/mafia.erfanhp.ir).
+[Mafia website](https://mafia.erfanhp.ir).
 
 ## نسخه pwa
 
