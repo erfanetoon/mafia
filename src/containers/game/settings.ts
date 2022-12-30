@@ -1,5 +1,9 @@
 export const Games: Array<{ label: string; value: TGames }> = [
     {
+        label: "بازپرس",
+        value: "investigator",
+    },
+    {
         label: "تفنگدار",
         value: "rifleman",
     },
@@ -14,6 +18,52 @@ export const Games: Array<{ label: string; value: TGames }> = [
 ];
 
 export const Roles: Record<TGames, Array<IRole>> = {
+    investigator: [
+        {
+            title: "پدرخوانده",
+            type: "mafia",
+        },
+        {
+            title: "ناتو",
+            type: "mafia",
+        },
+        {
+            title: "شیاد",
+            type: "mafia",
+        },
+        {
+            title: "مافیا ساده",
+            type: "mafia",
+        },
+        {
+            title: "دکتر",
+            type: "citizen",
+        },
+        {
+            title: "حرفه ای",
+            type: "citizen",
+        },
+        {
+            title: "کارآگاه",
+            type: "citizen",
+        },
+        {
+            title: "رویین تن",
+            type: "citizen",
+        },
+        {
+            title: "بازپرس",
+            type: "citizen",
+        },
+        {
+            title: "هانتر",
+            type: "citizen",
+        },
+        {
+            title: "شهروند ساده",
+            type: "citizen",
+        },
+    ],
     bartender: [
         {
             title: "پدرخوانده",

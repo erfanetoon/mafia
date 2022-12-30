@@ -2,7 +2,7 @@ type TDesignGameSteps = "init" | "showRole" | "manage";
 
 type TRoleTypes = "citizen" | "mafia";
 
-type TGames = "rifleman" | "filimo" | "bartender";
+type TGames = "rifleman" | "filimo" | "bartender" | "investigator";
 
 interface IRole {
     title: string;
