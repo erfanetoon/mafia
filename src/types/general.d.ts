@@ -15,3 +15,5 @@ declare global {
 }
 
 type TGender = "male" | "female";
+
+declare module "react-range";

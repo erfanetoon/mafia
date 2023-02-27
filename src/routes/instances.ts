@@ -1,6 +1,7 @@
 const RoutesInstance: Record<TRoutes, string> = {
     homepage: "/",
-    users: "/users",
+    newGame: "/game/new",
+    showRoles: "/game/show",
     game: "/game",
 };
 

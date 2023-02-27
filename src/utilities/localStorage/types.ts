@@ -1,1 +1,1 @@
-export type TStorageItems = "game" | "users";
+export type TStorageItems = "activeGame";

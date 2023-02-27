@@ -1,8 +1,9 @@
-import Game from "@pages/game";
 import Homepage from "@pages/index";
-import Users from "@pages/users";
 import { Navigate, Route, Routes } from "react-router-dom";
 import RoutesInstance from "./instances";
+import NewGame from "@pages/game/new";
+import Show from "@pages/game/show";
+import Game from "@pages/game";
 
 const AppRoutes = () => {
     return (
@@ -11,8 +12,12 @@ const AppRoutes = () => {
                 <Route index element={<Homepage />} />
             </Route>
 
-            <Route path={RoutesInstance.users}>
-                <Route index element={<Users />} />
+            <Route path={RoutesInstance.newGame}>
+                <Route index element={<NewGame />} />
+            </Route>
+
+            <Route path={RoutesInstance.showRoles}>
+                <Route index element={<Show />} />
             </Route>
 
             <Route path={RoutesInstance.game}>

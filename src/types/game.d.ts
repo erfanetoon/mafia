@@ -1,12 +1,14 @@
-type TDesignGameSteps = "init" | "showRole" | "manage";
+type TDesignGameSteps = "showRole" | "manage";
 
 type TRoleTypes = "citizen" | "mafia";
 
-type TGames = "rifleman" | "filimo" | "bartender" | "investigator";
+type TGames = "rifleman" | "filimo" | "bartender" | "investigator" | "advanced";
 
 interface IRole {
     title: string;
     type: TRoleTypes;
+    min?: number;
+    max?: number;
 }
 
 interface IGameTypes {

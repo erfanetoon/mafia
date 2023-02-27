@@ -1,1 +1,1 @@
-type TRoutes = "homepage" | "users" | "game";
+type TRoutes = "homepage" | "newGame" | "showRoles" | "game";
