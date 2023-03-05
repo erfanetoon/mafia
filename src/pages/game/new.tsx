@@ -1,11 +1,16 @@
 import NewGameContainer from "@containers/game/new";
-import RootLayout from "@layouts/root";
+import PageLayout from "@layouts/page";
 
 const NewGame = () => {
     return (
-        <RootLayout title="طراحی بازی جدید">
+        <PageLayout
+            root={{
+                title: "بازی جدید",
+            }}
+            previousRoute="homepage"
+            title="بازی جدید">
             <NewGameContainer />
-        </RootLayout>
+        </PageLayout>
     );
 };
 

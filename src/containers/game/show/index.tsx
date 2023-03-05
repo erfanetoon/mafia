@@ -2,11 +2,9 @@ import SiteLoading from "@components/loadings/siteLoading";
 import { useGameContext } from "@contexts/game";
 import { Button, Modal } from "@mantine/core";
 import { openConfirmModal } from "@mantine/modals";
-import RoutesInstance from "@routes/instances";
-import classNames from "classnames";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ShowDetails from "./showDetails";
+import { useRouting } from "@contexts/routing";
 
 const ShowRolesContainer = () => {
     const [loading, setLoading] = useState(true);
@@ -14,9 +12,10 @@ const ShowRolesContainer = () => {
     const [activeItem, setActiveItem] = useState<number | null>(null);
     const [seen, setSeen] = useState<Array<number>>([]);
 
-    const Navigate = useNavigate();
+    const { activeGame, handleChangeGame, handleSetEnterName } =
+        useGameContext();
 
-    const { activeGame, handleActiveGame } = useGameContext();
+    const { handleChangeRoute } = useRouting();
 
     const confirmModal = () =>
         openConfirmModal({
@@ -35,22 +34,67 @@ const ShowRolesContainer = () => {
             onCancel: () => {},
             onConfirm: () => {
                 activeGame &&
-                    handleActiveGame({
-                        ...activeGame,
+                    handleChangeGame({
                         step: "manage",
                     });
 
-                Navigate(RoutesInstance.game);
+                handleChangeRoute("game");
+            },
+        });
+
+    const confirmModalForInputName = () =>
+        openConfirmModal({
+            classNames: {
+                modal: "bg-dark-500 p-4",
+            },
+            closeOnClickOutside: false,
+            centered: true,
+            title: "آیا مایل هستید پس از مشاهده نقش هر بازیکن نام آن بازیکن را وارد نمایید؟",
+            labels: { confirm: "بلی", cancel: "خیر" },
+            cancelProps: {
+                radius: 9999,
+            },
+            confirmProps: {
+                radius: 9999,
+            },
+
+            onCancel: () => {
+                activeGame && handleSetEnterName(false);
+
+                handleSpreadRoles();
+            },
+            onConfirm: () => {
+                activeGame && handleSetEnterName(true);
+
+                handleSpreadRoles();
             },
         });
 
     useEffect(() => {
-        handleSpreadRoles();
+        if (!activeGame) {
+            handleChangeRoute("homepage");
+
+            return undefined;
+        }
+
+        if (activeGame.askEnterName) {
+            handleSpreadRoles();
+        } else {
+            confirmModalForInputName();
+        }
     }, []);
 
     const handleSpreadRoles = () => {
         if (!activeGame) {
-            Navigate(RoutesInstance.homepage);
+            handleChangeRoute("homepage");
+
+            return undefined;
+        }
+
+        if (activeGame.usersRole.length) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
 
             return undefined;
         }
@@ -94,8 +138,7 @@ const ShowRolesContainer = () => {
             i++;
         }
 
-        handleActiveGame({
-            ...activeGame,
+        handleChangeGame({
             usersRole: usersRoles.sort(function (a, b) {
                 return a.user.id - b.user.id;
             }),
@@ -103,7 +146,7 @@ const ShowRolesContainer = () => {
 
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 1000);
     };
 
     return (
@@ -117,22 +160,32 @@ const ShowRolesContainer = () => {
             {!loading && activeGame && (
                 <div className="h-full flex flex-col">
                     <div className="h-full overflow-auto scroll-gray-700 w-full px-1 mb-4">
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-4 gap-2">
                             {activeGame.usersRole.map(
                                 (item, i) =>
                                     !seen.includes(i) && (
                                         <div
                                             key={i}
-                                            className={classNames(
-                                                "text-center p-2 transition-all duration-300 rounded-3xl cursor-pointer bg-white bg-opacity-20",
-                                            )}
+                                            className="flex flex-col items-center"
                                             onClick={() => {
                                                 setActiveItem(i);
                                                 setIsShowModal(true);
                                             }}>
-                                            <span className="font-medium">
+                                            <div
+                                                key={i}
+                                                className="p-0.5 border border-solid border-white rounded-full overflow-hidden w-[90%] mb-1">
+                                                <div className="p-2 bg-white rounded-full">
+                                                    <img
+                                                        src="/images/icon.png"
+                                                        className="w-full"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="text-center">
                                                 {item.user.name}
-                                            </span>
+                                            </div>
                                         </div>
                                     ),
                             )}
@@ -146,7 +199,7 @@ const ShowRolesContainer = () => {
                                 closeOnClickOutside={false}
                                 closeOnEscape={false}
                                 classNames={{
-                                    modal: "bg-dark-500 p-2",
+                                    modal: "bg-dark-500 p-4",
                                     body: "h-full",
                                 }}>
                                 <ShowDetails
@@ -172,7 +225,7 @@ const ShowRolesContainer = () => {
                         </div>
                     </div>
 
-                    <div className="w-full">
+                    <div className="w-full py-1">
                         <Button
                             variant="filled"
                             radius={9999}
@@ -182,12 +235,15 @@ const ShowRolesContainer = () => {
                                     seen.length === activeGame.usersRole.length
                                 ) {
                                     activeGame &&
-                                        handleActiveGame({
-                                            ...activeGame,
+                                        handleChangeGame({
                                             step: "manage",
+                                            usersRole: seen.map(
+                                                (item) =>
+                                                    activeGame.usersRole[item],
+                                            ),
                                         });
 
-                                    Navigate(RoutesInstance.game);
+                                    handleChangeRoute("game");
                                 } else {
                                     confirmModal();
                                 }

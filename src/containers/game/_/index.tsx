@@ -1,76 +1,37 @@
 import { useGameContext } from "@contexts/game";
-import { ActionIcon, Button } from "@mantine/core";
-import RoutesInstance from "@routes/instances";
-import classNames from "classnames";
-import { useEffect, useState } from "react";
-import { VscCheck } from "react-icons/vsc";
-import { useNavigate } from "react-router-dom";
+import { useRouting } from "@contexts/routing";
+import { Button } from "@mantine/core";
+import { useState } from "react";
 
 const GameContainer = () => {
     const [isShowRole, setIsShowRole] = useState(false);
 
     const { activeGame } = useGameContext();
 
-    const Navigate = useNavigate();
-
-    useEffect(() => {
-        if (!activeGame) {
-            Navigate(RoutesInstance.homepage);
-        }
-    }, []);
+    const { handleChangeRoute } = useRouting();
 
     return (
-        <>
-            <div className="flex items-center w-full mb-4">
-                <Button
-                    size="sm"
-                    variant={isShowRole ? "filled" : "subtle"}
-                    color="blue"
-                    radius={9999}
-                    onClick={() => {
-                        setIsShowRole(!isShowRole);
-                    }}>
-                    مشاهده نقش ها
-                </Button>
-            </div>
-
-            <div className="h-full w-full overflow-auto scroll-gray-700">
-                <div className="grid grid-cols-3 gap-4">
+        <div className="h-full flex flex-col overflow-hidden">
+            <div className="h-full w-full overflow-auto scroll-gray-700 p-2">
+                <div className="grid grid-cols-3 gap-2">
                     {activeGame?.usersRole.map((item, i) => (
                         <div
                             key={i}
-                            className={classNames(
-                                "text-center transition-all duration-300 rounded-3xl cursor-pointer ",
-                            )}>
-                            <div className="h-10 w-10 mx-auto mb-2 relative">
-                                {isShowRole && (
-                                    <div className="bg-black bg-opacity-30 w-full h-full absolute top-0 rounded-full flex items-center justify-center">
-                                        <ActionIcon
-                                            variant="filled"
-                                            color={
-                                                item.role.type === "citizen"
-                                                    ? "blue"
-                                                    : "red"
-                                            }
-                                            radius={9999}>
-                                            <VscCheck />
-                                        </ActionIcon>
-                                    </div>
-                                )}
+                            className="flex flex-col items-center bg-dark-600 rounded-lg p-1">
+                            <div className="p-0.5 border border-solid border-white rounded-full overflow-hidden w-[70%] mb-1">
+                                <div className="p-2 bg-white rounded-full">
+                                    <img
+                                        src="/images/icon.png"
+                                        className="w-full"
+                                        alt=""
+                                    />
+                                </div>
                             </div>
 
-                            <div className="font-medium mb-1">
-                                {item.user.name}
-                            </div>
+                            <div className="text-center">{item.user.name}</div>
 
                             {isShowRole && (
-                                <div
-                                    className={classNames(
-                                        "text-xs text-white rounded-full py-0.5",
-                                        item.role.type === "mafia"
-                                            ? "bg-red-700"
-                                            : "bg-blue-700",
-                                    )}>
+                                <div className="text-xs bg-white text-black w-full rounded-lg p-2 font-bold text-center">
                                     {item.role.title}
                                 </div>
                             )}
@@ -78,7 +39,33 @@ const GameContainer = () => {
                     ))}
                 </div>
             </div>
-        </>
+
+            <div className="flex items-center w-full py-2">
+                <Button
+                    size="xs"
+                    variant={isShowRole ? "filled" : "subtle"}
+                    color="blue"
+                    radius={9999}
+                    className="w-1/2 mx-1"
+                    onClick={() => {
+                        setIsShowRole(!isShowRole);
+                    }}>
+                    نمایش نقش ها
+                </Button>
+
+                <Button
+                    size="xs"
+                    variant="filled"
+                    color="red"
+                    className="w-1/2 mx-1"
+                    radius={9999}
+                    onClick={() => {
+                        handleChangeRoute("showRoles");
+                    }}>
+                    مشاهده مجدد نقش ها
+                </Button>
+            </div>
+        </div>
     );
 };
 

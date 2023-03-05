@@ -47,7 +47,7 @@ const Role: FC<Props> = ({ formData, setFormData }) => {
         setIsShow(false);
         setFormData({
             ...formData,
-            roles: selected,
+            roles: selected.filter((item) => item.count),
         });
         setSelected([]);
     };
@@ -137,7 +137,7 @@ const Role: FC<Props> = ({ formData, setFormData }) => {
     return (
         <div className="flex flex-col w-full h-full overflow-hidden">
             <div
-                className="bg-black bg-opacity-20 rounded-full p-4 cursor-pointer"
+                className="bg-gray-700 rounded-full p-4 cursor-pointer"
                 onClick={() => setIsShow(true)}>
                 <div className="flex items-center mb-2">
                     <span className="text-md font-medium ml-2">نقش ها</span>

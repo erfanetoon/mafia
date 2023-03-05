@@ -340,7 +340,7 @@ export const Roles: Record<TGames, Array<IRole>> = {
         {
             title: "مافیا ساده",
             type: "mafia",
-            min: 1,
+            min: 0,
             max: 2,
         },
         {

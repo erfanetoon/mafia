@@ -1,11 +1,16 @@
 import ShowRolesContainer from "@containers/game/show";
-import RootLayout from "@layouts/root";
+import PageLayout from "@layouts/page";
 
 const ShowRoles = () => {
     return (
-        <RootLayout title="توزیع نقش">
+        <PageLayout
+            root={{
+                title: "توزیع نقش",
+            }}
+            previousRoute="homepage"
+            title="توزیع نقش">
             <ShowRolesContainer />
-        </RootLayout>
+        </PageLayout>
     );
 };
 

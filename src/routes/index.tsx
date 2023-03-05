@@ -1,35 +1,13 @@
-import Homepage from "@pages/index";
-import { Navigate, Route, Routes } from "react-router-dom";
-import RoutesInstance from "./instances";
-import NewGame from "@pages/game/new";
-import Show from "@pages/game/show";
-import Game from "@pages/game";
+import { useRouting } from "@contexts/routing";
+import { RoutesComponent } from "@contexts/routing/settings";
 
-const AppRoutes = () => {
-    return (
-        <Routes>
-            <Route path={RoutesInstance.homepage}>
-                <Route index element={<Homepage />} />
-            </Route>
+const Routes = () => {
+    const { route } = useRouting();
 
-            <Route path={RoutesInstance.newGame}>
-                <Route index element={<NewGame />} />
-            </Route>
+    const Component = RoutesComponent[route];
 
-            <Route path={RoutesInstance.showRoles}>
-                <Route index element={<Show />} />
-            </Route>
-
-            <Route path={RoutesInstance.game}>
-                <Route index element={<Game />} />
-            </Route>
-
-            <Route
-                path="*"
-                element={<Navigate to={RoutesInstance.homepage} replace />}
-            />
-        </Routes>
-    );
+    console.log(route);
+    return <Component />;
 };
 
-export default AppRoutes;
+export default Routes;

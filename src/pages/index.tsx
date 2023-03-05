@@ -3,7 +3,7 @@ import RootLayout from "@layouts/root";
 
 const Homepage = () => {
     return (
-        <RootLayout title="صفحه اصلی">
+        <RootLayout title="خدای مافیا">
             <HomepageContainer />
         </RootLayout>
     );
