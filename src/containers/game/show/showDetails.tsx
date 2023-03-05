@@ -2,6 +2,7 @@ import { useGameContext } from "@contexts/game";
 import { Button, TextInput } from "@mantine/core";
 import classNames from "classnames";
 import { FC, useState } from "react";
+import { toast } from "react-toastify";
 
 interface Props {
     data: { user: IUser; role: IRole } | null;
@@ -21,6 +22,7 @@ const ShowDetails: FC<Props> = ({ data, handleClose }) => {
         }
 
         if (!name) {
+            toast.error("نام بازیکن را وارد نمایید");
             return null;
         }
 
