@@ -71,11 +71,7 @@ const Form = () => {
             return undefined;
         }
 
-        if (
-            formData.game === "advanced" &&
-            (!formData.roles.length ||
-                formData.roles.length !== formData.players)
-        ) {
+        if (formData.game === "advanced" && !formData.roles.length) {
             setIsValid(false);
             return undefined;
         }
